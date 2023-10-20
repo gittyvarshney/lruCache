@@ -1,15 +1,15 @@
 # LRU Cache Implementation in HTML & JS
-Implementation of Cache in javascript, we are asynchronously updating the LRU cache and storign the data to browser's localStorage using the LRUCache Class
+Implementation of LRU Cache in javascript, Asynchronously updating the LRU cache and storing the data to browser's localStorage using the LRUCache Class
 
 ## LRUCache Class
 - constructor
-  - First It will try to retrieve the cache data, LRU order & max size from the local storage, if somehow the data is not retrieved sets the default cache size to 1
+  - First It will try to retrieve the cache data, LRU order & max size from the local storage, if somehow the data is not present in the localStorage, it sets the default cache size to 1 & initialize the empty cache
 - set(key,value) 
     -   If key is already present in the cache it will simply update the data to that particular key field & update the LRU accordingly
     -   If key is not present and cache is not full, it will simply add the key and data to the cache & update the LRU accordingly
     -   If key is not present and cache is full, it will first remove the least recently used key field from the cache & update the LRU accordingly
 - get(key)
-    - If the key is present in the cache it will return it simply otherwise return null
+    - If the key is present in the cache it will return it simply, otherwise return null
 - useKey(key)
   - This method will update the LRU priority array asynchronously whenever a query is made on the cache and save the data into the local storage
 - updateLocalStorage()
