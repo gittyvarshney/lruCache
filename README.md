@@ -25,14 +25,15 @@ Implementation of Cache in javascript, we are asynchronously updating the LRU ca
 -   You Can Clear the data
 
 ## Screenshots
-![Browser Screenshot](https://github.com/gittyvarshney/lruCache/blob/main/lru-cache.png?raw=true)
+![Browser Screenshot](https://github.com/gittyvarshney/lruCache/blob/main/lru-cache.jpg?raw=true)
 
 
 ## Deployments
+You can try with url: https://gittyvarshney.github.io/lruCache/
 
 
 ## Steps to run Locally
 - clone the repo:
 - Start VS Code
-- Install Live Server extenstion
+- Install Live Server extension
 - right Click on index.html and click on open with Live Server
