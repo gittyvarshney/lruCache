@@ -172,7 +172,6 @@ const cache = new LRUCache();
 change_size_btn.addEventListener('click', (e) => {
 
     const sizeInput = size_input.value;
-    console.log("size input is: ", sizeInput);
     if(sizeInput && !isNaN(Number(sizeInput)) && Number(sizeInput) > 0){
         cache.setSize(Number(sizeInput));
     }
@@ -206,7 +205,6 @@ get_data_btn.addEventListener('click', (e) => {
 
     if(getInput && typeof getInput === 'string'){
         const val = cache.get(getInput);
-        console.log("val is:: ", val);
         if(val){
             p_tag.textContent = val;
             return;
