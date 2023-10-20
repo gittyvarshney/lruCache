@@ -30,7 +30,7 @@ You can try with url: https://gittyvarshney.github.io/lruCache/
 
 
 ## Steps to run Locally
-- clone the repo:
+- clone the repo: https://github.com/gittyvarshney/lruCache.git
 - Start VS Code
 - Install Live Server extension
 - right Click on index.html and click on open with Live Server
