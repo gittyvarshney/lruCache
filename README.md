@@ -24,9 +24,6 @@ Implementation of Cache in javascript, we are asynchronously updating the LRU ca
 -   You Can Also Simulate using the particular key field (inorder to update it's LRU priority)
 -   You Can Clear the data
 
-## Screenshots
-![Browser Screenshot](https://github.com/gittyvarshney/lruCache/blob/main/lru-cache.jpg?raw=true)
-
 
 ## Deployments
 You can try with url: https://gittyvarshney.github.io/lruCache/
