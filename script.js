@@ -6,7 +6,7 @@ class LRUCache{
     max_size = 1;
 
     /** Cache Object to save the keys for value */
-    cache = {}
+    cache = new Map();
 
     /** Array to pop the least used key from the array */
     lruOrder = [];
@@ -16,7 +16,11 @@ class LRUCache{
         /** get cache from local storage if present */
         const savedCache = localStorage.getItem('lruCache');
         if(savedCache){
-            this.cache = JSON.parse(savedCache);
+            try{
+            this.cache = new Map(JSON.parse(savedCache));
+            }catch(e){
+                console.log("Unable to retrieve the cache Map ", e);
+            }
         }
 
         /** get lru order from local storage if present */
@@ -36,7 +40,7 @@ class LRUCache{
     /** Need to update the local storage asynchronously */
     updateLocalStorage(){
         setTimeout(() => {
-            localStorage.setItem('lruCache', JSON.stringify(this.cache));
+            localStorage.setItem('lruCache', JSON.stringify(Array.from(this.cache.entries())));
             localStorage.setItem('lru', JSON.stringify(this.lruOrder));
         })
     }
@@ -49,7 +53,7 @@ class LRUCache{
             while(this.lruOrder.length !== size){
                 let removedKey = this.lruOrder[0]; //removed least recently used
                 this.lruOrder = this.lruOrder.slice(1); //removed least recently used in lru order
-                delete this.cache[removedKey]; //removed the least recently used key from cache
+                this.cache.delete(removedKey); //removed the least recently used key from cache
             }
 
             this.updateLocalStorage(); //async
@@ -65,7 +69,7 @@ class LRUCache{
     useKey(key){
 
         setTimeout(() => { 
-            if(this.cache[key]){
+            if(this.cache.has(key)){
                 const filter_out_key = this.lruOrder.filter((stored_key) => stored_key !== key);
                 this.lruOrder = [...filter_out_key, key];
             }
@@ -76,16 +80,16 @@ class LRUCache{
     set(key, value){
 
         /** if somehow key is already present in cache we just need to update it's value */
-        if(this.cache[key]){
+        if(this.cache.has(key)){
 
-            this.cache[key] = value;
+            this.cache.set(key,value);
             
         }else{
 
             /** If cache is not full */
-            if(Object.keys(this.cache).length < this.max_size){
+            if(this.cache.size < this.max_size){
 
-                this.cache[key] = value; // setting the cache
+                this.cache.set(key,value);  // setting the cache
 
             }else{ /** If cache is full we need to remove the least recently used */
 
@@ -95,9 +99,9 @@ class LRUCache{
 
                 this.lruOrder.push(key);   //added new key as most recently used in lru order
 
-                delete this.cache[removedKey]; //removed the least recently used key from cache
+                this.cache.delete(removedKey); //removed the least recently used key from cache
 
-                this.cache[key] = value; // added new key in the cache
+                this.cache.set(key,value); // added new key in the cache
 
             }
         }
@@ -108,7 +112,7 @@ class LRUCache{
 
     /** Method to clear the whole cache */
     clear(){
-        this.cache = {};
+        this.cache.clear();
         this.lruOrder = [];
 
         this.updateLocalStorage();
@@ -116,12 +120,12 @@ class LRUCache{
 
     /** Method to query a particular key in cache */
     get(key){
-        if(this.cache[key]){
+        if(this.cache.has(key)){
 
             /** asynchronus function to update the LRU order */
             this.useKey(key);
 
-            return this.cache[key];
+            return this.cache.get(key);
 
         }else{
             return null;
